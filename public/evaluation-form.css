@@ -1,0 +1,380 @@
+/* evaluation-form.css - Enhanced with improved dark mode contrast */
+
+/* Performance Metrics */
+.performance-metrics {
+  list-style: none;
+  padding: 0;
+  background: linear-gradient(135deg, rgba(248, 249, 252, 0.95) 0%, rgba(233, 236, 239, 0.95) 100%);
+  border-radius: var(--border-radius);
+  padding: 35px;
+  box-shadow: var(--box-shadow);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+  margin: 30px 0;
+}
+
+.performance-metrics::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.performance-metrics::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: rotate 20s linear infinite;
+}
+
+.performance-metrics li {
+  margin: 25px 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 2;
+  transition: var(--transition);
+  border-radius: var(--border-radius-sm);
+}
+
+.performance-metrics li:last-child {
+  border-bottom: none;
+}
+
+.performance-metrics li:hover {
+  background: rgba(255, 255, 255, 0.7);
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  transform: translateY(-2px);
+}
+
+.performance-metrics li::before {
+  content: "🎯";
+  margin-right: 15px;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: var(--transition);
+}
+
+.performance-metrics li:hover::before {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.performance-metrics .metric-label {
+  font-weight: 600;
+  color: var(--gray-dark);
+  flex: 1;
+  position: relative;
+  padding-left: 15px;
+}
+
+.performance-metrics .metric-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.task-inputs {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.task-inputs input {
+  width: 100px;
+  text-align: center;
+  font-weight: 700;
+  padding: 14px 16px;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  transition: var(--transition spring);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--gray-dark);
+}
+
+.task-inputs input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+  transform: translateY(-2px) scale(1.05);
+  background: var(--white);
+  outline: none;
+}
+
+.task-inputs input:hover {
+  border-color: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode adjustments for task inputs */
+@media (prefers-color-scheme: dark) {
+  .task-inputs input {
+    color: #f1f5f9;
+    background: rgba(55, 65, 81, 0.9);
+  }
+
+  .task-inputs input:focus {
+    color: #f1f5f9;
+    background: rgba(75, 85, 99, 0.95);
+  }
+
+  .task-inputs input::placeholder {
+    color: #94a3b8;
+  }
+}
+
+/* Rating stars enhancement */
+.rating-stars {
+  display: flex;
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.rating-stars input {
+  display: none;
+}
+
+.rating-stars label {
+  font-size: 32px;
+  color: #ccc;
+  cursor: pointer;
+  transition: var(--transition spring);
+  position: relative;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rating-stars label::before {
+  content: "⭐";
+}
+
+.rating-stars label:hover {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.rating-stars input:checked ~ label,
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+  color: var(--warning);
+  text-shadow: 0 0 8px rgba(249, 199, 79, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 0 5px rgba(249, 199, 79, 0.3));
+}
+
+/* Score Indicator */
+.score-indicator {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transform: translateY(-50%) rotate(-2deg);
+  transform-origin: center;
+  top: 50%;
+  font-weight: 700;
+  font-size: 16px;
+  margin-left: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition spring);
+}
+
+.score-indicator.excellent {
+  background: linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.score-indicator.good {
+  background: linear-gradient(135deg, var(--warning) 0%, var(--accent-light) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.score-indicator.fair {
+  background: linear-gradient(135deg, var(--accent) 0%, #f59e0b 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.score-indicator.poor {
+  background: linear-gradient(135deg, var(--danger) 0%, var(--danger-light) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.score-indicator:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Submit button enhancement */
+.evaluation-submit {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: var(--border-radius-lg);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition spring);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-top: 30px;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.evaluation-submit::before {
+  content: "📊";
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.evaluation-submit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+}
+
+.evaluation-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+}
+
+.evaluation-submit:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Progress indicator */
+.evaluation-progress {
+  background: var(--light-gray);
+  height: 6px;
+  border-radius: 3px;
+  margin: 30px 0 20px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.evaluation-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+  transition: width 0.8s ease-out;
+  position: relative;
+}
+
+.evaluation-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.3) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.3) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 16px 16px;
+  animation: progressMove 2s linear infinite;
+}
+
+@keyframes progressMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 16px 0; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .performance-metrics {
+    padding: 25px 20px;
+  }
+  
+  .performance-metrics li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    font-size: 16px;
+  }
+  
+  .task-inputs {
+    align-self: stretch;
+    justify-content: flex-end;
+  }
+  
+  .task-inputs input {
+    width: 80px;
+    padding: 12px;
+  }
+  
+  .rating-stars label {
+    font-size: 28px;
+  }
+  
+  .evaluation-section {
+    padding: 20px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .performance-metrics li {
+    padding: 15px 0;
+  }
+  
+  .task-inputs input {
+    width: 70px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .rating-stars label {
+    font-size: 24px;
+  }
+  
+  .evaluation-submit {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+}
